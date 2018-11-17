@@ -16,7 +16,7 @@
         <form action="{{ url_for('blog.delete', id=juego['idjuego']) }}" method="post">
             <input class="danger" type="submit" value="Borrar" onclick="return confirm('Seguro, seguro?');">
         </form>
-        <form action="{{ url_for('blog.update', id=juego['idjuego']) }}" method="post">
+        <form action="{{ url_for('blog.update', id=juego['idjuego']) }}" method="get">
             <input type="submit" value="Editar">
         </form>
     </header>

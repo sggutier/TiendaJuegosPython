@@ -1,20 +1,33 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Edit "{{ post['title'] }}"{% endblock %}</h1>
+<h1>{% block title %}Edit "{{ juego['nombre'] }}"{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title"
-           value="{{ request.form['title'] or post['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
+    <label for="nombre">Nombre</label>
+    <input name="nombre" id="nombre" value="{{ request.form['nombre'] or juego['nombre'] }}" required>
+    <label for="genero">Género</label>
+    <input name="genero" id="genero" value="{{ request.form['genero'] or juego['genero'] }}" required>
+    <label for="fechalanzamiento">Fecha de Lanzamiento</label>
+    <input name="fechalanzamiento" id="fechalanzamiento" value="{{ request.form['fechalanzamiento'] or juego['fechalanzamiento'] }}" required>
+    <label for="desarrollador">Desarrollador</label>
+    <input name="desarrollador" id="desarrollador" value="{{ request.form['desarrollador'] or juego['desarrollador'] }}" required>
+    <label for="clasificacion">Clasificacion</label>
+    <input name="clasificacion" id="clasificacion" value="{{ request.form['clasificacion'] or juego['clasificacion'] }}" required>
+    <label for="precio">Precio</label>
+    <input name="precio" id="precio" value="{{ request.form['precio'] or juego['precio'] }}" required>
+    <label for="rating">Rating</label>
+    <input name="rating" id="rating" value="{{ request.form['rating'] or juego['rating'] }}" required>
+    <label for="publicador">Publicador</label>
+    <input name="publicador" id="publicador" value="{{ request.form['publicador'] or juego['publicador'] }}" required>
+    <label for="imagen">¿Imágen?</label>
+    <input name="imagen" id="imagen" value="{{ juego['imagen'] if juego['imagen'] else request.form['imagen'] }}" >
     <input type="submit" value="Save">
 </form>
 <hr>
-<form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+<form action="{{ url_for('blog.delete', id=juego['idjuego']) }}" method="post">
+    <input class="danger" type="submit" value="Delete" onclick="return confirm('¿Seguro, seguro?');">
 </form>
 {% endblock %}
