@@ -1,0 +1,4 @@
+#+TITLE: Acceso a Bases de Datos desde Python
+
+Aquí está el código de un proyecto escolar para accesar a una base de datos desde Python.
+Está hecho con [[http://flask.pocoo.org/][Flask]].
