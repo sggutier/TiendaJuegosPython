@@ -11,7 +11,7 @@
     <header>
         <div>
             <h1>{{ post['title'] }}</h1>
-            <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+            <div class="about">by {{ 'German' }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
         </div>
         <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Editar</a>
     </header>

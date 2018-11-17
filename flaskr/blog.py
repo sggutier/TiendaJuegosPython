@@ -3,7 +3,6 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required
 from flaskr.db import get_db, commit_db
 
 bp = Blueprint('blog', __name__)
@@ -13,8 +12,7 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     db.execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
+        'SELECT id, title, body, created from post'
         ' ORDER BY created DESC'
     )
     posts = db.fetchall()
@@ -36,9 +34,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, author_id)'
-                ' VALUES (%s, %s, %s)',
-                (title, body, 1)
+                'INSERT INTO post (title, body)'
+                ' VALUES (%s, %s)',
+                (title, body)
             )
             commit_db()
             return redirect(url_for('blog.index'))
@@ -49,9 +47,8 @@ def create():
 def get_post(id, check_author=True):
     db = get_db()
     db.execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' WHERE p.id = %s',
+        'SELECT id, title, body, created from post'
+        ' WHERE id = %s',
         (id,)
     )
     post = db.fetchone()
