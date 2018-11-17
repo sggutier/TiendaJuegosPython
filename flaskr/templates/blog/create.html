@@ -6,10 +6,24 @@
 
 {% block content %}
 <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
+    <label for="nombre">Nombre</label>
+    <input name="nombre" id="nombre" value="{{ request.form['nombre'] }}" required>
+    <label for="genero">Género</label>
+    <input name="genero" id="genero" value="{{ request.form['genero'] }}" required>
+    <label for="fechalanzamiento">Fecha de Lanzamiento</label>
+    <input name="fechalanzamiento" id="fechalanzamiento" value="{{ request.form['fechalanzamiento'] }}" required>
+    <label for="desarrollador">Desarrollador</label>
+    <input name="desarrollador" id="desarrollador" value="{{ request.form['desarrollador'] }}" required>
+    <label for="clasificacion">Clasificacion</label>
+    <input name="clasificacion" id="clasificacion" value="{{ request.form['clasificacion'] }}" required>
+    <label for="precio">Precio</label>
+    <input name="precio" id="precio" value="{{ request.form['precio'] }}" required>
+    <label for="rating">Rating</label>
+    <input name="rating" id="rating" value="{{ request.form['rating'] }}" required>
+    <label for="publicador">Publicador</label>
+    <input name="publicador" id="publicador" value="{{ request.form['publicador'] }}" required>
+    <label for="imagen">¿Imágen?</label>
+    <input name="imagen" id="imagen" value="{{ request.form['imagen'] }}" >
     <input type="submit" value="Save">
 </form>
 {% endblock %}

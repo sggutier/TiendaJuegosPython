@@ -6,16 +6,20 @@
 {% endblock %}
 
 {% block content %}
-{% for post in posts %}
+{% for juego in juegos %}
 <article class="post">
     <header>
         <div>
-            <h1>{{ post['title'] }}</h1>
-            <div class="about">by {{ 'German' }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+            <h1>{{ juego['nombre'] }}</h1>
+            <div class="about">by {{ juego['desarrollador'] }} on {{ juego['fechalanzamiento'].strftime('%Y-%m-%d') }}</div>
         </div>
-        <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Editar</a>
+        <a class="action" href="{{ url_for('blog.update', id=juego['idjuego']) }}">Editar</a>
     </header>
-    <p class="body">{{ post['body'] }}</p>
+    <p class="body">{{ juego['genero'] }}</p>
+    <p class="body">{{ juego['clasificacion'] }}</p>
+    <p class="body">{{ juego['precio'] }}</p>
+    <p class="body">{{ juego['rating'] }}</p>
+    <p class="body">{{ juego['publicador'] }}</p>
 </article>
 {% if not loop.last %}
 <hr>
