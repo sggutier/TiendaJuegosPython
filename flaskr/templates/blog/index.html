@@ -13,7 +13,12 @@
             <h1>{{ juego['nombre'] }}</h1>
             <div class="about">by {{ juego['desarrollador'] }} on {{ juego['fechalanzamiento'].strftime('%Y-%m-%d') }}</div>
         </div>
-        <a class="action" href="{{ url_for('blog.update', id=juego['idjuego']) }}">Editar</a>
+        <form action="{{ url_for('blog.delete', id=juego['idjuego']) }}" method="post">
+            <input class="danger" type="submit" value="Borrar" onclick="return confirm('Seguro, seguro?');">
+        </form>
+        <form action="{{ url_for('blog.update', id=juego['idjuego']) }}" method="post">
+            <input type="submit" value="Editar">
+        </form>
     </header>
     <p class="body">{{ juego['genero'] }}</p>
     <p class="body">{{ juego['clasificacion'] }}</p>

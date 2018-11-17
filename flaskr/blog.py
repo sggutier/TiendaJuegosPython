@@ -66,7 +66,7 @@ def create():
     return render_template('blog/create.html')
 
 
-def get_post(id, check_author=True):
+def get_juego(id, check_author=True):
     db = get_db()
     db.execute(
         'SELECT idjuego, nombre, genero, fechalanzamiento, desarrollador, clasificacion, precio, rating, publicador, imagen from juegos'
@@ -83,7 +83,7 @@ def get_post(id, check_author=True):
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 def update(id):
-    post = get_post(id)
+    post = get_juego(id)
 
     if request.method == 'POST':
         title = request.form['title']
@@ -110,8 +110,8 @@ def update(id):
 
 @bp.route('/<int:id>/delete', methods=('POST',))
 def delete(id):
-    get_post(id)
+    get_juego(id)
     db = get_db()
-    db.execute('DELETE FROM post WHERE id = %s', (id,))
+    db.execute('DELETE FROM juegos WHERE idjuego = %s', (id,))
     commit_db()
     return redirect(url_for('blog.index'))
