@@ -22,7 +22,6 @@ def index():
 
 
 @bp.route('/create', methods=('GET', 'POST'))
-@login_required
 def create():
     if request.method == 'POST':
         title = request.form['title']
@@ -39,7 +38,7 @@ def create():
             db.execute(
                 'INSERT INTO post (title, body, author_id)'
                 ' VALUES (%s, %s, %s)',
-                (title, body, g.user['id'])
+                (title, body, 1)
             )
             commit_db()
             return redirect(url_for('blog.index'))
@@ -60,14 +59,10 @@ def get_post(id, check_author=True):
     if post is None:
         abort(404, "Post id {0} doesn't exist.".format(id))
 
-    if check_author and post['author_id'] != g.user['id']:
-        abort(403)
-
     return post
 
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
-@login_required
 def update(id):
     post = get_post(id)
 
@@ -95,7 +90,6 @@ def update(id):
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))
-@login_required
 def delete(id):
     get_post(id)
     db = get_db()
