@@ -8,8 +8,10 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev')
-    app.config['MYSQL_USER'] = 'root' #'anita'
-    app.config['MYSQL_PASSWORD'] = '' #'lagordalagartonanotragaladrogalatina'
+    # app.config['MYSQL_USER'] = 'anita'
+    app.config['MYSQL_USER'] = 'root'
+    app.config['MYSQL_PASSWORD'] = ''
+    # app.config['MYSQL_PASSWORD'] = 'lagordalagartonanotragaladrogalatina'
     app.config['MYSQL_DB'] = 'terpomo'
     # app.config['MYSQL_HOST'] = '68.183.49.7'
     app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
