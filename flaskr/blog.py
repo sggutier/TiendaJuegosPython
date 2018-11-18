@@ -5,6 +5,7 @@ from werkzeug.exceptions import abort
 
 from flaskr.db import get_db, commit_db
 from base64 import b64encode as b64enc
+import datetime
 
 bp = Blueprint('blog', __name__)
 
@@ -80,7 +81,7 @@ def create():
             commit_db()
             return redirect(url_for('blog.index'))
 
-    return render_template('blog/create.html')
+    return render_template('blog/create.html', hoy=datetime.date.today().isoformat())
 
 
 def get_juego(id, check_author=True):

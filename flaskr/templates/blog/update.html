@@ -11,15 +11,15 @@
     <label for="genero">Género</label>
     <input name="genero" id="genero" value="{{ request.form['genero'] or juego['genero'] }}" required>
     <label for="fechalanzamiento">Fecha de Lanzamiento</label>
-    <input name="fechalanzamiento" id="fechalanzamiento" value="{{ request.form['fechalanzamiento'] or juego['fechalanzamiento'] }}" required>
+    <input type="date" name="fechalanzamiento" id="fechalanzamiento" value="{{ request.form['fechalanzamiento'] or juego['fechalanzamiento'] }}" required>
     <label for="desarrollador">Desarrollador</label>
     <input name="desarrollador" id="desarrollador" value="{{ request.form['desarrollador'] or juego['desarrollador'] }}" required>
     <label for="clasificacion">Clasificacion</label>
     <input name="clasificacion" id="clasificacion" value="{{ request.form['clasificacion'] or juego['clasificacion'] }}" required>
     <label for="precio">Precio</label>
-    <input name="precio" id="precio" value="{{ request.form['precio'] or juego['precio'] }}" required>
+    <input name="precio" id="precio" type='number' step='0.01' placeholder='0.00' value="{{ request.form['precio'] or juego['precio'] }}" required>
     <label for="rating">Rating</label>
-    <input name="rating" id="rating" value="{{ request.form['rating'] or juego['rating'] }}" required>
+    <input name="rating" id="rating" type='number' step='0.1' placeholder='0.0' value="{{ request.form['rating'] or juego['rating'] }}" required>
     <label for="publicador">Publicador</label>
     <input name="publicador" id="publicador" value="{{ request.form['publicador'] or juego['publicador'] }}" required>
     <img src="data:image/jpg;base64,{{ encr(juego['imagen']) if juego['imagen'] else '' }}">

@@ -7,21 +7,21 @@
 {% block content %}
 <form method="post" enctype = "multipart/form-data">
     <label for="nombre">Nombre</label>
-    <input name="nombre" id="nombre" value="{{ request.form['nombre'] }}" required>
+    <input name="nombre" id="nombre" value="{{ '' }}" required>
     <label for="genero">Género</label>
-    <input name="genero" id="genero" value="{{ request.form['genero'] }}" required>
+    <input name="genero" id="genero" value="{{ '' }}" required>
     <label for="fechalanzamiento">Fecha de Lanzamiento</label>
-    <input name="fechalanzamiento" id="fechalanzamiento" value="{{ request.form['fechalanzamiento'] }}" required>
+    <input type="date" name="fechalanzamiento" id="fechalanzamiento" value="{{ hoy }}" required>
     <label for="desarrollador">Desarrollador</label>
-    <input name="desarrollador" id="desarrollador" value="{{ request.form['desarrollador'] }}" required>
+    <input name="desarrollador" id="desarrollador" value="{{ '' }}" required>
     <label for="clasificacion">Clasificacion</label>
-    <input name="clasificacion" id="clasificacion" value="{{ request.form['clasificacion'] }}" required>
+    <input name="clasificacion" id="clasificacion" value="{{ '' }}" required>
     <label for="precio">Precio</label>
-    <input name="precio" id="precio" value="{{ request.form['precio'] }}" required>
+    <input name="precio" id="precio" type='number' step='0.01' value='0.00' placeholder='0.00' required>
     <label for="rating">Rating</label>
-    <input name="rating" id="rating" value="{{ request.form['rating'] }}" required>
+    <input name="rating" id="rating" type='number' step='0.1' value='0.0' placeholder='0.0' required>
     <label for="publicador">Publicador</label>
-    <input name="publicador" id="publicador" value="{{ request.form['publicador'] }}" required>
+    <input name="publicador" id="publicador" value="{{ '' }}" required>
     <label for="imagen">¿Imágen?</label>    
     <input class='picture-file-input' type='file' name='imagen' />
     <input type="submit" value="Save">
