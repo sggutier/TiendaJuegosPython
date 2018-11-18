@@ -2,6 +2,12 @@
 
 {% block header %}
 <h1>{% block title %}Posts{% endblock %}</h1>
+<div class="search-container">
+    <form action="{{ url_for('blog.index') }}" method="post">
+        <input type="text" placeholder="Serĉo.." Name="search" id="search">
+        <button type="submit">Boton?</button>
+    </form>
+</div>
 <a class="action" href="{{ url_for('blog.create') }}">Nuevo</a>
 {% endblock %}
 

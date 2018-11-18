@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
+<form method="post" enctype = "multipart/form-data">
     <label for="nombre">Nombre</label>
     <input name="nombre" id="nombre" value="{{ request.form['nombre'] }}" required>
     <label for="genero">Género</label>
@@ -22,8 +22,8 @@
     <input name="rating" id="rating" value="{{ request.form['rating'] }}" required>
     <label for="publicador">Publicador</label>
     <input name="publicador" id="publicador" value="{{ request.form['publicador'] }}" required>
-    <label for="imagen">¿Imágen?</label>
-    <input name="imagen" id="imagen" value="{{ request.form['imagen'] }}" >
+    <label for="imagen">¿Imágen?</label>    
+    <input class='picture-file-input' type='file' name='imagen' />
     <input type="submit" value="Save">
 </form>
 {% endblock %}

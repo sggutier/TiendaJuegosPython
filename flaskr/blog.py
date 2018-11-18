@@ -4,17 +4,30 @@ from flask import (
 from werkzeug.exceptions import abort
 
 from flaskr.db import get_db, commit_db
+from base64 import b64encode as b64enc
 
 bp = Blueprint('blog', __name__)
 
 
-@bp.route('/')
+def encodaPics(pic):
+    return b64enc(pic).decode("utf-8")
+
+
+@bp.route('/', methods=('GET', 'POST'))
 def index():
     db = get_db()
-    db.execute(
-        'SELECT idjuego, nombre, genero, fechalanzamiento, desarrollador, clasificacion, precio, rating, publicador, imagen from juegos'
-        ' ORDER BY fechalanzamiento DESC'
-    )
+    srx = request.form['search'] if request.method == 'POST' else ''
+    if srx != '':
+        db.execute(
+            'SELECT idjuego, nombre, genero, fechalanzamiento, desarrollador, clasificacion, precio, rating, publicador, imagen from juegos'
+            '  where desarrollador = %s ORDER BY fechalanzamiento DESC',
+            (srx,)
+        )
+    else:
+        db.execute(
+            'SELECT idjuego, nombre, genero, fechalanzamiento, desarrollador, clasificacion, precio, rating, publicador, imagen from juegos'
+            ' ORDER BY fechalanzamiento DESC'
+        )
     posts = db.fetchall()
     return render_template('blog/index.html', juegos=posts)
 
@@ -30,8 +43,11 @@ def create():
         precio = request.form['precio']
         rating = request.form['rating']
         publicador = request.form['publicador']
-        imagen = request.form['imagen']
+        imagen = None
         errors = []
+
+        if 'imagen' in request.files:
+            imagen = request.files['imagen'].stream.read()
 
         if not nombre:
             errors.append('Se necesita el nombre.')
@@ -95,8 +111,11 @@ def update(id):
         precio = request.form['precio']
         rating = request.form['rating']
         publicador = request.form['publicador']
-        imagen = request.form['imagen']
+        imagen = None
         errors = []
+
+        if 'imagen' in request.files:
+            imagen = request.files['imagen'].stream.read()
 
         if not nombre:
             errors.append('Se necesita el nombre.')
@@ -114,22 +133,27 @@ def update(id):
             errors.append('Se necesita el rating.')
         if not publicador:
             errors.append('Se necesita el publicador.')
-        if not imagen:
-            imagen = None
 
         if len(errors) > 0:
             flash('\n'.join(errors))
         else:
             db = get_db()
-            db.execute(
-                'UPDATE juegos SET nombre = %s, genero = %s, fechalanzamiento = %s, desarrollador = %s, clasificacion = %s, precio = %s, rating = %s, publicador = %s, imagen = %s'
-                ' WHERE idjuego = %s',
-                (nombre, genero, fechalanzamiento, desarrollador, clasificacion, precio, rating, publicador, imagen, id)
-            )
+            if imagen:
+                db.execute(
+                    'UPDATE juegos SET nombre = %s, genero = %s, fechalanzamiento = %s, desarrollador = %s, clasificacion = %s, precio = %s, rating = %s, publicador = %s, imagen = %s'
+                    ' WHERE idjuego = %s',
+                    (nombre, genero, fechalanzamiento, desarrollador, clasificacion, precio, rating, publicador, imagen, id)
+                )
+            else:
+                db.execute(
+                    'UPDATE juegos SET nombre = %s, genero = %s, fechalanzamiento = %s, desarrollador = %s, clasificacion = %s, precio = %s, rating = %s, publicador = %s'
+                    ' WHERE idjuego = %s',
+                    (nombre, genero, fechalanzamiento, desarrollador, clasificacion, precio, rating, publicador, id)
+                )
             commit_db()
             return redirect(url_for('blog.index'))
 
-    return render_template('blog/update.html', juego=juego)
+    return render_template('blog/update.html', juego=juego, encr=encodaPics)
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))

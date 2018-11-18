@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
+<form method="post" enctype = "multipart/form-data">
     <label for="nombre">Nombre</label>
     <input name="nombre" id="nombre" value="{{ request.form['nombre'] or juego['nombre'] }}" required>
     <label for="genero">Género</label>
@@ -22,12 +22,14 @@
     <input name="rating" id="rating" value="{{ request.form['rating'] or juego['rating'] }}" required>
     <label for="publicador">Publicador</label>
     <input name="publicador" id="publicador" value="{{ request.form['publicador'] or juego['publicador'] }}" required>
-    <label for="imagen">¿Imágen?</label>
-    <input name="imagen" id="imagen" value="{{ juego['imagen'] if juego['imagen'] else request.form['imagen'] }}" >
+    <img src="data:image/jpg;base64,{{ encr(juego['imagen']) if juego['imagen'] else '' }}">
+    <label for="imagen">¿Imágen Nueva?</label>    
+    <input class='picture-file-input' type='file' name='imagen' />
     <input type="submit" value="Save">
 </form>
 <hr>
 <form action="{{ url_for('blog.delete', id=juego['idjuego']) }}" method="post">
     <input class="danger" type="submit" value="Delete" onclick="return confirm('¿Seguro, seguro?');">
 </form>
+
 {% endblock %}

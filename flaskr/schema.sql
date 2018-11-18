@@ -10,7 +10,7 @@ CREATE TABLE juegos (
   precio decimal(10,2) NOT NULL,
   rating decimal(3,2) NOT NULL,
   publicador varchar(50) NOT NULL,
-  imagen blob,
+  imagen longblob,
   PRIMARY KEY (idjuego)
 ) ;
 
