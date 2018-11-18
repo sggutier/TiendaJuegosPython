@@ -30,7 +30,7 @@ def index():
             ' ORDER BY fechalanzamiento DESC'
         )
     posts = db.fetchall()
-    return render_template('blog/index.html', juegos=posts)
+    return render_template('blog/index.html', juegos=posts, encr=encodaPics)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
