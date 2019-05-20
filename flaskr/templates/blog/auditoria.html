@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Auditorías{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<table border="1">
+    <thead>
+        <th>idaudi</th>
+        <th>accion</th>
+        <th>usr</th>
+        <th>timestamp</th>
+        <th>idjuegoViejo</th>
+        <th>nombreViejo</th>
+        <th>generoViejo</th>
+        <th>fechalanzamientoViejo</th>
+        <th>desarrolladorViejo</th>
+        <th>clasificacionViejo</th>
+        <th>precioViejo</th>
+        <th>stockViejo</th>
+        <th>descripcionViejo</th>
+        <th>imagenViejo</th>
+        <th>idjuegoNuevo</th>
+        <th>nombreNuevo</th>
+        <th>generoNuevo</th>
+        <th>fechalanzamientoNuevo</th>
+        <th>desarrolladorNuevo</th>
+        <th>clasificacionNuevo</th>
+        <th>precioNuevo</th>
+        <th>stockNuevo</th>
+        <th>descripcionNuevo</th>
+        <th>imagenNuevo</th>
+    </thead>
+    
+    <tbody>
+        {% for row in lineas %}
+        <tr>
+            {% for i in range(row|length) %}
+            {% if row[i] == None %}
+            <td></td>
+            {% elif i != 13 and i != 23  %}
+            <td>{{ row[i] }}</td>
+            {% else %}
+            <td><img style="height: 10em; width: auto; margin-right: 1%; margin-top: 0.8em; margin-bottom: 0.5em;" src="data:image/jpg;base64,{{ encr(row[i]) }}"></td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table> 
+{% endblock %}

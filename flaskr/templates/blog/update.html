@@ -18,10 +18,10 @@
     <input name="clasificacion" id="clasificacion" value="{{ request.form['clasificacion'] or juego['clasificacion'] }}" required>
     <label for="precio">Precio</label>
     <input name="precio" id="precio" type='number' step='0.01' placeholder='0.00' value="{{ request.form['precio'] or juego['precio'] }}" required>
-    <label for="rating">Rating</label>
-    <input name="rating" id="rating" type='number' step='0.1' placeholder='0.0' value="{{ request.form['rating'] or juego['rating'] }}" required>
-    <label for="publicador">Publicador</label>
-    <input name="publicador" id="publicador" value="{{ request.form['publicador'] or juego['publicador'] }}" required>
+    <label for="stock">Stock</label>
+    <input name="stock" id="stock" type='number' step='0.1' placeholder='0.0' value="{{ request.form['stock'] or juego['stock'] }}" required>
+    <label for="descripcion">Descripcion</label>
+    <input name="descripcion" id="descripcion" value="{{ request.form['descripcion'] or juego['descripcion'] }}" required>
     <img src="data:image/jpg;base64,{{ encr(juego['imagen']) if juego['imagen'] else '' }}">
     <label for="imagen">¿Imágen Nueva?</label>    
     <input class='picture-file-input' type='file' name='imagen' />

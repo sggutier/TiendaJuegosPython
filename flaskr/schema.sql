@@ -1,6 +1,5 @@
-DROP TABLE IF EXISTS juegos;
-
-CREATE TABLE juegos (
+drop table if exists productos;
+CREATE TABLE productos (
   idjuego int(11) NOT NULL AUTO_INCREMENT,
   nombre varchar(50) NOT NULL,
   genero varchar(50) NOT NULL,
@@ -8,9 +7,8 @@ CREATE TABLE juegos (
   desarrollador varchar(50) NOT NULL,
   clasificacion varchar(30) NOT NULL,
   precio decimal(10,2) NOT NULL,
-  rating decimal(3,2) NOT NULL,
-  publicador varchar(50) NOT NULL,
-  imagen longblob,
+  stock int(11) NOT NULL,
+  descripcion text NOT NULL,
+  imagen longblob DEFAULT NULL,
   PRIMARY KEY (idjuego)
-) ;
-
+);

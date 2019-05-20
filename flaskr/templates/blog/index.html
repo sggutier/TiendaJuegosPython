@@ -8,7 +8,6 @@
         <button type="submit">Boton?</button>
     </form>
 </div>
-<a class="action" href="{{ url_for('blog.create') }}">Nuevo</a>
 {% endblock %}
 
 {% block content %}
@@ -26,12 +25,14 @@
             <input type="submit" value="Editar">
         </form>
     </header>
-    <img style="float: left; height: 10em; width: auto; margin-right: 1%; margin-top: 0.8em; margin-bottom: 0.5em;" src="data:image/jpg;base64,{{ encr(juego['imagen']) if juego['imagen'] else '' }}">
+    <img style="float: right; height: 10em; width: auto; margin-right: 1%; margin-top: 0.8em; margin-bottom: 0.5em;" src="data:image/jpg;base64,{{ encr(juego['imagen']) if juego['imagen'] else '' }}">
     <p class="body"> <b> Género: </b> {{ juego['genero'] }}</p>
+    <p class="body"> <b> Fecha de Lanzamiento: </b> {{ juego['fechalanzamiento'] }}</p>
+    <p class="body"> <b> Desarrollador: </b> {{ juego['desarrollador'] }}</p>
     <p class="body"> <b> Clasificación: </b> {{ juego['clasificacion'] }}</p>
     <p class="body"> <b> Precio: </b> {{ juego['precio'] }}</p>
-    <p class="body"> <b> Rating: </b> {{ juego['rating'] }}</p>
-    <p class="body"> <b> Publicador: </b>{{ juego['publicador'] }}</p>
+    <p class="body"> <b> Stock: </b> {{ juego['stock'] }}</p>
+    <p class="body"> <b> Descripcion: </b>{{ juego['descripcion'] }}</p>
 </article>
 {% if not loop.last %}
 <hr>

@@ -1,42 +1,39 @@
-import sqlite3
+import mysql.connector as elconector
 from flask_mysqldb import MySQL
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 
-# def get_db():
-#     if 'db' not in g:
-#         g.db = sqlite3.connect(
-#             current_app.config['DATABASE'],
-#             detect_types=sqlite3.PARSE_DECLTYPES
-#         )
-#         g.db.row_factory = sqlite3.Row
 
-#     return g.db
+def get_db_maestro(dico=True):
+    global maestro
+    maestro = elconector.connect(
+        host="localhost",
+        user="anita",
+        database="ventas",
+        passwd="lagordalagartonanotragaladrogalatina"
+    )
+    return maestro.cursor(dictionary=dico)
 
 
-def get_db():
-    global mysql
-    # if 'db' not in g:
-    # g.db = mysql.connection.cursor()
-    # return g.db
-    return mysql.connection.cursor()
+def get_db_esclavo(dico=True):
+    global maestro, esclavo
+    # esclavo = elconector.connect(
+    #     host="192.168.31.207",
+    #     user="remotron",
+    #     database="ventas",
+    #     passwd="password"
+    # )
+    return maestro.cursor(dictionary=dico)
 
 
 def commit_db():
-    global mysql
-    mysql.connection.commit()
-
-
-def close_db(e=None):
-    db = g.pop('db', None)
-
-    if db is not None:
-        db.close()
+    global maestro
+    maestro.commit()
 
 
 def init_db():
-    db = get_db()
+    db = get_db_maestro()
 
     with current_app.open_resource('schema.sql') as f:
         txt = f.read().decode('utf8')
@@ -59,7 +56,20 @@ def init_db_command():
 
 
 def init_app(app):
-    global mysql
-    mysql = MySQL(app)
+    global maestro, esclavo
+    maestro = elconector.connect(
+        host="localhost",
+        user="anita",
+        database="ventas",
+        passwd="lagordalagartonanotragaladrogalatina"
+    )
+    # esclavo = elconector.connect(
+    #     host="192.168.31.207",
+    #     user="remotron",
+    #     database="ventas",
+    #     passwd="password"
+    # )
+    # esclavo = maestro
+    # mysql = MySQL(app)
     # app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
