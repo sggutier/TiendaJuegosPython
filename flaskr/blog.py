@@ -172,7 +172,7 @@ def delete(id):
 
 
 @bp.route('/auditoria', methods=('GET', 'POST'))
-def auditoria():
+def auditoriaF():
     db = get_db_esclavo(False)
     db.execute(
         'select idaudi, accion, usr, timestamp, idjuegoViejo, nombreViejo, generoViejo, fechalanzamientoViejo, desarrolladorViejo, clasificacionViejo, precioViejo, stockViejo, descripcionViejo, imagenViejo, idjuegoNuevo, nombreNuevo, generoNuevo, fechalanzamientoNuevo, desarrolladorNuevo, clasificacionNuevo, precioNuevo, stockNuevo, descripcionNuevo, imagenNuevo from auditoria'
