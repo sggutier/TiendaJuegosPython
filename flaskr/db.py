@@ -19,12 +19,13 @@ def get_db_maestro(dico=True):
 def get_db_esclavo(dico=True):
     global maestro, esclavo
     # esclavo = elconector.connect(
-    #     host="192.168.31.207",
+    #     host="192.168.43.4",
     #     user="remotron",
     #     database="ventas",
     #     passwd="password"
     # )
-    return maestro.cursor(dictionary=dico)
+    esclavo = maestro
+    return esclavo.cursor(dictionary=dico)
 
 
 def commit_db():
